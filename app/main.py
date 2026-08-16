@@ -16,6 +16,7 @@ from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import configure_logging
 from app.core.middleware import RequestContextMiddleware
+from app.core.openapi import API_DESCRIPTION, OPENAPI_TAGS
 
 
 @asynccontextmanager
@@ -28,11 +29,14 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.app_name,
         version="0.1.0",
-        description="Backend de Sevanna — academia de cosmética natural.",
+        description=API_DESCRIPTION,
+        openapi_tags=OPENAPI_TAGS,
         docs_url=settings.docs_url,
         redoc_url=settings.redoc_url,
         openapi_url=settings.openapi_url,
         lifespan=lifespan,
+        # Keep the pasted Bearer token across Swagger UI reloads while testing.
+        swagger_ui_parameters={"persistAuthorization": True},
     )
 
     # Rate limiting is applied per-route via dependencies (see app/core/rate_limit).

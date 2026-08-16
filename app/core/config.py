@@ -7,10 +7,10 @@ be hardcoded — they are read exclusively from the environment / `.env` file.
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import Field, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 Environment = Literal["development", "testing", "staging", "production"]
 
@@ -47,7 +47,11 @@ class Settings(BaseSettings):
 
     # --- CORS ---
     frontend_url: str = "http://localhost:5173"
-    cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:5173"])
+    # NoDecode: don't JSON-decode this env value; the validator below splits a
+    # comma-separated string (e.g. "http://a.com,http://b.com") into a list.
+    cors_origins: Annotated[list[str], NoDecode] = Field(
+        default_factory=lambda: ["http://localhost:5173"]
+    )
 
     # --- Docs ---
     enable_docs: bool = True
