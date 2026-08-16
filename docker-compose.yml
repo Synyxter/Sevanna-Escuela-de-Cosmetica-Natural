@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sevanna
+      POSTGRES_PASSWORD: sevanna
+      POSTGRES_DB: sevanna
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sevanna -d sevanna"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql+asyncpg://sevanna:sevanna@db:5432/sevanna
+      JWT_SECRET_KEY: dev-secret-change-me
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000
+      FRONTEND_URL: http://localhost:5173
+      PAYMENT_PROVIDER: fake
+      EMAIL_PROVIDER: console
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+
+  # Optional: uncomment to enable Redis for future rate-limiting / queues.
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+
+volumes:
+  pgdata:
