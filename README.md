@@ -61,6 +61,43 @@ pip install -r requirements.txt
 cp .env.example .env    # y edita los valores
 ```
 
+## Prueba rápida local (SQLite + Swagger UI)
+
+Para probar la API **sin instalar PostgreSQL**, usa una base SQLite local. En tu
+`.env` define:
+
+```env
+DATABASE_URL=sqlite+aiosqlite:///./sevanna_dev.db
+PAYMENT_PROVIDER=fake
+EMAIL_PROVIDER=console
+```
+
+Luego, desde la raíz del proyecto (con el entorno virtual activado):
+
+```bash
+alembic upgrade head          # crea el esquema en SQLite
+python -m scripts.seed        # admin + curso de ejemplo
+uvicorn app.main:app --reload # levanta la API
+```
+
+Abre **http://localhost:8000/docs** (Swagger UI) para probar:
+
+1. `POST /api/v1/auth/login` con el admin sembrado
+   (`admin@sevanna.co` / la contraseña de `FIRST_ADMIN_PASSWORD`).
+2. Copia `data.access_token`, pulsa **Authorize 🔒** y pégalo.
+3. Explora el catálogo, crea una compra y simula el pago.
+
+**Simular un pago (proveedor `fake`)**: tras `POST /api/v1/payments/create`,
+confirma con `POST /api/v1/payments/webhook` enviando el header
+`X-Fake-Signature: fake-secret` y el body:
+
+```json
+{ "reference": "<external_reference del pago>", "status": "APPROVED" }
+```
+
+> La misma migración funciona en SQLite (dev) y PostgreSQL (producción). El
+> índice único parcial de inscripciones activas solo aplica en PostgreSQL.
+
 ## Variables de entorno
 
 Todas las variables están documentadas en [`.env.example`](.env.example).
