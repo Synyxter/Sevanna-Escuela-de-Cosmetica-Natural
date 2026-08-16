@@ -16,7 +16,9 @@ down_revision: str | None = None
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
-_NOW = sa.text("now()")
+# CURRENT_TIMESTAMP is valid on both PostgreSQL and SQLite, so the same
+# migration can bootstrap a local SQLite dev database and a production Postgres.
+_NOW = sa.text("CURRENT_TIMESTAMP")
 
 
 def _timestamps() -> list[sa.Column]:
