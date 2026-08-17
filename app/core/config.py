@@ -56,6 +56,19 @@ class Settings(BaseSettings):
     # --- Docs ---
     enable_docs: bool = True
 
+    # --- Feature flags ---
+    # Sevanna funciona como catálogo de cursos. La inscripción y el pago se
+    # gestionan por WhatsApp (fuera del backend), así que estos módulos quedan
+    # DESACTIVADOS por defecto. El código se conserva y se reactiva con la flag.
+    #   enable_accounts  -> cuentas de estudiante: registro, verificación,
+    #                       recuperación, perfil (/users/me...), admin de usuarios.
+    #   enable_commerce  -> compras, pagos (webhook) e inscripciones + sus
+    #                       listados de administración.
+    # El login de admin (/auth/login, /auth/refresh, /auth/logout) SIEMPRE está
+    # activo porque el administrador debe autenticarse para gestionar el catálogo.
+    enable_accounts: bool = False
+    enable_commerce: bool = False
+
     # --- Payment provider ---
     payment_provider: Literal["wompi", "fake"] = "fake"
     payment_api_key: str = ""

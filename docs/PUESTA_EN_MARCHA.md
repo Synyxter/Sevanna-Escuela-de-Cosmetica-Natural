@@ -3,6 +3,12 @@
 Guía para reunir la configuración que falta y dejar el backend listo para tu
 frontend y para producción. Cada punto dice **qué hacer** y **qué enviarme**.
 
+> **Actualización de alcance (2026-08-16):** Sevanna es un **catálogo de cursos**;
+> inscripción y pago se gestionan por WhatsApp. Por eso los pasos **§3 (Wompi)** y
+> **§4 (SMTP)** son **opcionales / a futuro**: solo aplican si algún día reactivas
+> `ENABLE_COMMERCE` (pagos) o `ENABLE_ACCOUNTS` (cuentas/correo). Lo imprescindible
+> hoy es **§1 (frontend/CORS)** y **§2 (PostgreSQL)**.
+
 > **Seguridad de secretos (importante):** los valores sensibles (llaves de
 > Wompi, contraseña SMTP, URL de la base de datos) **los pones tú** en el
 > archivo `.env` local — **no los pegues en el chat**. `.env` está en
