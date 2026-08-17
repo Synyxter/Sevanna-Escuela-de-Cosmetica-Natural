@@ -1,6 +1,14 @@
 # Colección Postman — Sevanna API
 
-Colección lista para probar toda la API localmente.
+Colección lista para probar la API localmente.
+
+> **Nota de alcance (2026-08-16):** Sevanna es un **catálogo de cursos**; la
+> inscripción/pago se hacen por WhatsApp. Las carpetas **Purchases**, **Payments**,
+> **Enrollments** y **Users**, y los requests **Auth → Register/Verify/Forgot/Reset**,
+> corresponden a módulos **desactivados por defecto** y responderán `404` salvo que
+> actives `ENABLE_COMMERCE` / `ENABLE_ACCOUNTS` en el `.env`. Lo que funciona sin
+> flags: **Auth → Login/Refresh/Logout**, **Courses**, **Categories**, **Admin →
+> Courses/Categories** y **Health**.
 
 ## Importar
 

@@ -3,8 +3,19 @@
 API del núcleo de negocio de **Sevanna**, plataforma web de una academia de
 cosmética natural. Construida con **Python + FastAPI**, PostgreSQL, SQLAlchemy 2
 (async) y Alembic. Expone un contrato REST/JSON versionado (`/api/v1`) que el
-frontend consume sin conocer nada de la base de datos, los proveedores de pago o
-de correo, ni la lógica interna.
+frontend consume sin conocer nada de la base de datos ni la lógica interna.
+
+> ### Alcance actual: catálogo de cursos
+> Sevanna opera como un **catálogo de cursos**. La **inscripción y el pago se
+> gestionan por WhatsApp** (fuera del backend): en el frontend, al querer
+> inscribirse, el usuario ve un botón para escribir por WhatsApp, y por ese
+> medio se realizan el registro, el pago y el envío de enlaces de clases y grupos.
+>
+> Por eso los módulos de **pagos/compras/inscripciones** (`ENABLE_COMMERCE`) y de
+> **cuentas de estudiante** (`ENABLE_ACCOUNTS`) están **desactivados por defecto**.
+> Su código se conserva íntegro y se reactiva poniendo la flag en `true`, sin
+> reescribir nada. El **login de administrador** siempre está activo (para
+> gestionar el catálogo).
 
 ---
 
@@ -85,15 +96,15 @@ Abre **http://localhost:8000/docs** (Swagger UI) para probar:
 1. `POST /api/v1/auth/login` con el admin sembrado
    (`admin@sevanna.co` / la contraseña de `FIRST_ADMIN_PASSWORD`).
 2. Copia `data.access_token`, pulsa **Authorize 🔒** y pégalo.
-3. Explora el catálogo, crea una compra y simula el pago.
+3. Gestiona el catálogo desde `/api/v1/admin/courses` y míralo público en
+   `/api/v1/courses`.
 
-**Simular un pago (proveedor `fake`)**: tras `POST /api/v1/payments/create`,
-confirma con `POST /api/v1/payments/webhook` enviando el header
-`X-Fake-Signature: fake-secret` y el body:
-
-```json
-{ "reference": "<external_reference del pago>", "status": "APPROVED" }
-```
+> **Módulos opcionales.** Compras/pagos/inscripciones (`ENABLE_COMMERCE`) y
+> cuentas de estudiante (`ENABLE_ACCOUNTS`) están apagados por defecto. Para
+> probarlos (p. ej. simular un pago con el proveedor `fake`), primero ponlos en
+> `true` en tu `.env`; entonces, tras `POST /api/v1/payments/create`, confirma
+> con `POST /api/v1/payments/webhook` (header `X-Fake-Signature: fake-secret`,
+> body `{ "reference": "<ref>", "status": "APPROVED" }`).
 
 > La misma migración funciona en SQLite (dev) y PostgreSQL (producción). El
 > índice único parcial de inscripciones activas solo aplica en PostgreSQL.
@@ -172,9 +183,11 @@ Los tests corren contra SQLite en memoria (async) y usan los proveedores
 pytest
 ```
 
-Incluye el **flujo completo de integración** (`tests/test_full_flow.py`):
-registro → curso → compra → pago → webhook → inscripción → mis cursos → acceso,
-más idempotencia del webhook y rechazo de firmas inválidas.
+La suite activa las flags `ENABLE_ACCOUNTS`/`ENABLE_COMMERCE` para seguir
+cubriendo los módulos preservados. Incluye el **flujo completo de integración**
+(`tests/test_full_flow.py`): registro → curso → compra → pago → webhook →
+inscripción → mis cursos → acceso, más idempotencia del webhook y rechazo de
+firmas inválidas.
 
 ## Calidad de código
 
@@ -195,20 +208,17 @@ Todos bajo el prefijo `/api/v1`. Respuestas con envelope consistente:
 { "success": false, "error": { "code": "COURSE_NOT_FOUND", "message": "..." } }
 ```
 
+> **Leyenda:** 🟢 activo · 🟡 requiere `ENABLE_ACCOUNTS=true` · 🔵 requiere
+> `ENABLE_COMMERCE=true`. Los 🟡/🔵 devuelven `404` mientras la flag esté apagada.
+
 **Auth**
 ```
-POST /auth/register    POST /auth/login      POST /auth/refresh
-POST /auth/logout      POST /auth/verify-email
-POST /auth/forgot-password    POST /auth/reset-password
+🟢 POST /auth/login   POST /auth/refresh   POST /auth/logout
+🟡 POST /auth/register   POST /auth/verify-email
+🟡 POST /auth/forgot-password   POST /auth/reset-password
 ```
 
-**Usuario** (identidad tomada del token, nunca del cliente)
-```
-GET   /users/me        PATCH /users/me
-GET   /users/me/courses    GET /users/me/purchases
-```
-
-**Cursos públicos**
+**Cursos públicos** 🟢
 ```
 GET /courses            (paginación, búsqueda, filtros, orden)
 GET /courses/featured
@@ -216,25 +226,28 @@ GET /courses/{slug}
 GET /categories
 ```
 
-**Compras / Pagos**
-```
-POST /purchases         GET /purchases/{id}
-POST /payments/create   POST /payments/webhook   GET /payments/{id}
-```
-
-**Inscripciones**
-```
-GET /enrollments/{id}          GET /enrollments/{id}/access
-```
-
-**Administración** (requiere rol `ADMIN`)
+**Administración de catálogo** 🟢 (requiere rol `ADMIN`)
 ```
 GET/POST/GET/PATCH/DELETE /admin/courses[/{id}]
 POST /admin/categories
-GET  /admin/users     GET /admin/purchases     GET /admin/enrollments
 ```
 
-**Health**
+**Usuario** 🟡 (identidad tomada del token, nunca del cliente)
+```
+GET /users/me   PATCH /users/me
+GET /users/me/courses   GET /users/me/purchases
+GET /admin/users
+```
+
+**Compras / Pagos / Inscripciones** 🔵
+```
+POST /purchases         GET /purchases/{id}
+POST /payments/create   POST /payments/webhook   GET /payments/{id}
+GET /enrollments/{id}   GET /enrollments/{id}/access
+GET /admin/purchases    GET /admin/enrollments
+```
+
+**Otros** 🟢
 ```
 GET /health   GET /health/live   GET /health/ready
 ```

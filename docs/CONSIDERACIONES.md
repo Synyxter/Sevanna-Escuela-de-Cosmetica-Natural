@@ -9,6 +9,23 @@ Leyenda de prioridad: 🔴 bloqueante para producción · 🟠 importante · �
 
 ---
 
+## 0. Cambio de alcance (2026-08-16): catálogo de cursos
+
+Decisión de negocio: la plataforma funciona como **catálogo**. La inscripción y
+el pago se hacen **por WhatsApp** (el cliente evita flujo de dinero en la web).
+El frontend gestiona el botón/enlace de WhatsApp; el backend **no** procesa pagos
+ni inscripciones.
+
+- Los módulos de **pagos/compras/inscripciones** (`ENABLE_COMMERCE`) y de
+  **cuentas de estudiante** (`ENABLE_ACCOUNTS`) quedan **desactivados por
+  defecto**. Su código se **conserva** para una posible reactivación futura.
+- Activo: catálogo público + administración de cursos/categorías + login admin.
+- Efecto en pendientes: **Wompi (§1, §4) y buena parte de §3 pasan a "solo si se
+  reactiva `ENABLE_COMMERCE`"**. El correo SMTP (§4) solo es necesario si se
+  reactiva `ENABLE_ACCOUNTS` (verificación/reset).
+
+---
+
 ## 1. Configuración requerida antes de producción
 
 - 🔴 **Secreto JWT fuerte**: generar `JWT_SECRET_KEY` aleatorio y largo
