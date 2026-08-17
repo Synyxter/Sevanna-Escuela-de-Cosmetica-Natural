@@ -8,19 +8,27 @@ from __future__ import annotations
 API_DESCRIPTION = """
 API del backend de **Sevanna** — academia de cosmética natural.
 
-### Cómo probar desde esta interfaz
+Sevanna funciona como **catálogo de cursos**. La inscripción y el pago se
+gestionan **por WhatsApp** (fuera del backend): en el frontend, al querer
+inscribirse, el usuario ve un botón para escribir por WhatsApp, y por ese medio
+se hace el registro, el pago y el envío de enlaces de clases y grupos.
 
-1. Crea una cuenta en **`POST /api/v1/auth/register`** (o usa el admin sembrado).
-2. Inicia sesión en **`POST /api/v1/auth/login`**: copia el `access_token` de la
-   respuesta (`data.access_token`).
-3. Pulsa el botón **Authorize** 🔒 (arriba a la derecha) y pega el token.
-   A partir de ahí, las peticiones protegidas usarán tu sesión.
-4. Explora el catálogo, crea una compra, simula el pago y obtén el acceso.
+Superficie activa del API:
+- **Público:** catálogo de cursos (`/courses`, `/categories`) con filtros,
+  búsqueda y paginación.
+- **Admin:** gestión de cursos y categorías (`/admin/...`), previa autenticación.
 
-> Con el proveedor de pagos en modo **`fake`** (desarrollo), el webhook se
-> confirma enviando `POST /api/v1/payments/webhook` con el header
-> `X-Fake-Signature: fake-secret` y body
-> `{"reference": "<ref del pago>", "status": "APPROVED"}`.
+> Los módulos de **cuentas de estudiante** y de **pagos/compras/inscripciones**
+> están desactivados por defecto (se conservan en el código y se reactivan con
+> las flags `ENABLE_ACCOUNTS` / `ENABLE_COMMERCE`).
+
+### Cómo probar el admin desde esta interfaz
+
+1. Inicia sesión en **`POST /api/v1/auth/login`** con el admin sembrado y copia
+   el `access_token` (`data.access_token`).
+2. Pulsa **Authorize** 🔒 y pega el token.
+3. Gestiona el catálogo desde **`/api/v1/admin/courses`** y consulta el catálogo
+   público en **`/api/v1/courses`**.
 
 ### Formato de respuestas
 
