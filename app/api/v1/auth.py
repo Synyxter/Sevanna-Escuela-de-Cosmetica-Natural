@@ -22,30 +22,13 @@ from app.schemas.common import MessageResponse, SuccessResponse
 from app.schemas.user import UserResponse
 from app.services.auth_service import AuthService
 
+# Always-on auth: the admin needs to sign in to manage the catalog.
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-
-@router.post(
-    "/register",
-    status_code=status.HTTP_201_CREATED,
-    response_model=SuccessResponse[UserResponse],
-    dependencies=[Depends(register_rate_limit)],
-)
-async def register(
-    payload: RegisterRequest,
-    session: DBSession,
-    background: BackgroundTasks,
-) -> SuccessResponse[UserResponse]:
-    user = await AuthService(session).register(
-        full_name=payload.full_name,
-        email=payload.email,
-        password=payload.password,
-        background=background,
-    )
-    return SuccessResponse(
-        data=UserResponse.model_validate(user),
-        message="Registro exitoso. Revisa tu correo para verificar la cuenta.",
-    )
+# Public account lifecycle (self-registration, email verification, password
+# recovery). Part of the "accounts" module — only mounted when ENABLE_ACCOUNTS
+# is true. Kept intact for a possible future where students have accounts.
+accounts_router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.post(
@@ -74,13 +57,39 @@ async def logout(payload: LogoutRequest, session: DBSession) -> MessageResponse:
     return MessageResponse(message="Sesión cerrada.")
 
 
-@router.post("/verify-email", response_model=MessageResponse)
+# --------------------------------------------------------------------------- #
+# Accounts module (mounted only when ENABLE_ACCOUNTS is true)
+# --------------------------------------------------------------------------- #
+@accounts_router.post(
+    "/register",
+    status_code=status.HTTP_201_CREATED,
+    response_model=SuccessResponse[UserResponse],
+    dependencies=[Depends(register_rate_limit)],
+)
+async def register(
+    payload: RegisterRequest,
+    session: DBSession,
+    background: BackgroundTasks,
+) -> SuccessResponse[UserResponse]:
+    user = await AuthService(session).register(
+        full_name=payload.full_name,
+        email=payload.email,
+        password=payload.password,
+        background=background,
+    )
+    return SuccessResponse(
+        data=UserResponse.model_validate(user),
+        message="Registro exitoso. Revisa tu correo para verificar la cuenta.",
+    )
+
+
+@accounts_router.post("/verify-email", response_model=MessageResponse)
 async def verify_email(payload: VerifyEmailRequest, session: DBSession) -> MessageResponse:
     await AuthService(session).verify_email(token=payload.token)
     return MessageResponse(message="Correo verificado correctamente.")
 
 
-@router.post(
+@accounts_router.post(
     "/forgot-password",
     response_model=MessageResponse,
     dependencies=[Depends(forgot_password_rate_limit)],
@@ -96,7 +105,7 @@ async def forgot_password(
     return MessageResponse(message=message)
 
 
-@router.post("/reset-password", response_model=MessageResponse)
+@accounts_router.post("/reset-password", response_model=MessageResponse)
 async def reset_password(
     payload: ResetPasswordRequest, session: DBSession
 ) -> MessageResponse:

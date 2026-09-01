@@ -7,10 +7,10 @@ be hardcoded — they are read exclusively from the environment / `.env` file.
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import Field, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 Environment = Literal["development", "testing", "staging", "production"]
 
@@ -47,10 +47,27 @@ class Settings(BaseSettings):
 
     # --- CORS ---
     frontend_url: str = "http://localhost:5173"
-    cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:5173"])
+    # NoDecode: don't JSON-decode this env value; the validator below splits a
+    # comma-separated string (e.g. "http://a.com,http://b.com") into a list.
+    cors_origins: Annotated[list[str], NoDecode] = Field(
+        default_factory=lambda: ["http://localhost:5173"]
+    )
 
     # --- Docs ---
     enable_docs: bool = True
+
+    # --- Feature flags ---
+    # Sevanna funciona como catálogo de cursos. La inscripción y el pago se
+    # gestionan por WhatsApp (fuera del backend), así que estos módulos quedan
+    # DESACTIVADOS por defecto. El código se conserva y se reactiva con la flag.
+    #   enable_accounts  -> cuentas de estudiante: registro, verificación,
+    #                       recuperación, perfil (/users/me...), admin de usuarios.
+    #   enable_commerce  -> compras, pagos (webhook) e inscripciones + sus
+    #                       listados de administración.
+    # El login de admin (/auth/login, /auth/refresh, /auth/logout) SIEMPRE está
+    # activo porque el administrador debe autenticarse para gestionar el catálogo.
+    enable_accounts: bool = False
+    enable_commerce: bool = False
 
     # --- Payment provider ---
     payment_provider: Literal["wompi", "fake"] = "fake"
@@ -92,6 +109,22 @@ class Settings(BaseSettings):
         """Allow CORS_ORIGINS to be provided as a comma-separated string."""
         if isinstance(value, str):
             return [item.strip() for item in value.split(",") if item.strip()]
+        return value
+
+    @field_validator("database_url", mode="after")
+    @classmethod
+    def _normalize_db_url(cls, value: str) -> str:
+        """Ensure the async driver is used.
+
+        Managed providers (Render, Heroku, etc.) hand out URLs like
+        ``postgres://...`` or ``postgresql://...``; SQLAlchemy's async engine
+        requires the ``postgresql+asyncpg://`` scheme. Normalize it here so the
+        provider's DATABASE_URL can be used verbatim.
+        """
+        if value.startswith("postgres://"):
+            return "postgresql+asyncpg://" + value[len("postgres://") :]
+        if value.startswith("postgresql://"):
+            return "postgresql+asyncpg://" + value[len("postgresql://") :]
         return value
 
     @property

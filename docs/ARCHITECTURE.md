@@ -24,6 +24,29 @@ Prioridades de diseño (en orden):
 
 sin introducir complejidad innecesaria.
 
+### Alcance vigente: catálogo de cursos (feature flags)
+
+Sevanna opera como **catálogo de cursos**. La **inscripción y el pago se
+gestionan por WhatsApp**, fuera del backend: el frontend muestra un botón para
+escribir por WhatsApp y por ese canal se hacen registro, pago y envío de enlaces
+de clases y grupos. En consecuencia:
+
+- **Activo siempre:** catálogo público (`/courses`, `/categories`), administración
+  de cursos/categorías (`/admin/...`) y **login de administrador** (`/auth/login`,
+  `/auth/refresh`, `/auth/logout`).
+- **Desactivado por defecto (conservado en el código):**
+  - `ENABLE_ACCOUNTS` → cuentas de estudiante: `/auth/register`, verificación,
+    recuperación, `/users/me...`, `/admin/users`.
+  - `ENABLE_COMMERCE` → compras, pagos (webhook), inscripciones y sus listados
+    de administración.
+
+Los módulos desactivados **no se eliminan**: sus modelos, servicios, repos y
+routers permanecen intactos y se reactivan poniendo la flag en `true`
+(ver `app/api/router.py` y `app/core/config.py`), sin reescribir nada. Las
+secciones 29–45 y 12–16 describen esos módulos preservados; las **reglas de
+negocio de comercio** (precio congelado, webhook idempotente, transacción
+pago→inscripción) solo aplican cuando `ENABLE_COMMERCE` está activo.
+
 ## 2. Stack técnico
 
 | Área | Tecnología |

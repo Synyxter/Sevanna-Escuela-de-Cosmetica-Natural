@@ -1,0 +1,256 @@
+{
+  "info": {
+    "name": "Sevanna API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Colección del backend de Sevanna (FastAPI). Flujo sugerido: Auth > Login (guarda el token automáticamente) > Courses > Purchases > Payments > Enrollments. Base local: http://localhost:8000/api/v1. Autenticación Bearer con {{access_token}} a nivel de colección."
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{access_token}}", "type": "string" }]
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000/api/v1" },
+    { "key": "access_token", "value": "" },
+    { "key": "refresh_token", "value": "" },
+    { "key": "webhook_secret", "value": "fake-secret" },
+    { "key": "admin_email", "value": "admin@sevanna.co" },
+    { "key": "admin_password", "value": "Admin12345" },
+    { "key": "course_id", "value": "" },
+    { "key": "course_slug", "value": "elaboracion-de-jabones" },
+    { "key": "purchase_id", "value": "" },
+    { "key": "payment_id", "value": "" },
+    { "key": "payment_reference", "value": "" },
+    { "key": "enrollment_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/auth/register",
+            "body": { "mode": "raw", "raw": "{\n  \"full_name\": \"Estudiante Demo\",\n  \"email\": \"demo@sevanna.co\",\n  \"password\": \"Demo12345\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Login",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const j = pm.response.json();", "if (j && j.data) {", "  pm.collectionVariables.set('access_token', j.data.access_token);", "  pm.collectionVariables.set('refresh_token', j.data.refresh_token);", "  console.log('Tokens guardados en variables de colección');", "}"] } }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{admin_email}}\",\n  \"password\": \"{{admin_password}}\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Inicia sesión. El script de test guarda access_token y refresh_token automáticamente."
+          }
+        },
+        {
+          "name": "Refresh",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const j = pm.response.json();", "if (j && j.data) {", "  pm.collectionVariables.set('access_token', j.data.access_token);", "  pm.collectionVariables.set('refresh_token', j.data.refresh_token);", "}"] } }],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/auth/refresh",
+            "body": { "mode": "raw", "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/auth/logout",
+            "body": { "mode": "raw", "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Verify Email",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/auth/verify-email",
+            "body": { "mode": "raw", "raw": "{\n  \"token\": \"PEGA_AQUI_EL_TOKEN\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/auth/forgot-password",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{admin_email}}\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/auth/reset-password",
+            "body": { "mode": "raw", "raw": "{\n  \"token\": \"PEGA_AQUI_EL_TOKEN\",\n  \"new_password\": \"NuevaClave123\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        { "name": "Get Me", "request": { "method": "GET", "url": "{{base_url}}/users/me" } },
+        {
+          "name": "Update Me",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/users/me",
+            "body": { "mode": "raw", "raw": "{\n  \"full_name\": \"Nombre Actualizado\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "My Courses",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const j = pm.response.json();", "if (j && j.data && j.data.items && j.data.items.length) {", "  pm.collectionVariables.set('enrollment_id', j.data.items[0].enrollment_id);", "}"] } }],
+          "request": { "method": "GET", "url": { "raw": "{{base_url}}/users/me/courses?page=1&limit=12", "host": ["{{base_url}}"], "path": ["users", "me", "courses"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "12" }] } }
+        },
+        {
+          "name": "My Purchases",
+          "request": { "method": "GET", "url": { "raw": "{{base_url}}/users/me/purchases?page=1&limit=12", "host": ["{{base_url}}"], "path": ["users", "me", "purchases"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "12" }] } }
+        }
+      ]
+    },
+    {
+      "name": "Courses (público)",
+      "item": [
+        {
+          "name": "List Courses",
+          "request": { "auth": { "type": "noauth" }, "method": "GET", "url": { "raw": "{{base_url}}/courses?page=1&limit=12", "host": ["{{base_url}}"], "path": ["courses"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "12" }, { "key": "search", "value": "jabon", "disabled": true }, { "key": "level", "value": "BEGINNER", "disabled": true }, { "key": "modality", "value": "HYBRID", "disabled": true }, { "key": "category", "value": "jaboneria", "disabled": true }, { "key": "sort", "value": "-created_at", "disabled": true }] } }
+        },
+        {
+          "name": "Featured Courses",
+          "request": { "auth": { "type": "noauth" }, "method": "GET", "url": { "raw": "{{base_url}}/courses/featured?limit=6", "host": ["{{base_url}}"], "path": ["courses", "featured"], "query": [{ "key": "limit", "value": "6" }] } }
+        },
+        {
+          "name": "Course Detail (by slug)",
+          "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{base_url}}/courses/{{course_slug}}" }
+        }
+      ]
+    },
+    {
+      "name": "Categories (público)",
+      "item": [
+        { "name": "List Categories", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{base_url}}/categories" } }
+      ]
+    },
+    {
+      "name": "Purchases",
+      "item": [
+        {
+          "name": "Create Purchase",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const j = pm.response.json();", "if (j && j.data) { pm.collectionVariables.set('purchase_id', j.data.id); }"] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/purchases",
+            "body": { "mode": "raw", "raw": "{\n  \"course_id\": \"{{course_id}}\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Crea una compra PENDING con el precio congelado. Guarda purchase_id."
+          }
+        },
+        { "name": "Get Purchase", "request": { "method": "GET", "url": "{{base_url}}/purchases/{{purchase_id}}" } }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Payment",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const j = pm.response.json();", "if (j && j.data) {", "  pm.collectionVariables.set('payment_id', j.data.payment_id);", "  pm.collectionVariables.set('payment_reference', j.data.reference);", "}"] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/payments/create",
+            "body": { "mode": "raw", "raw": "{\n  \"purchase_id\": \"{{purchase_id}}\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Crea el pago con el proveedor. Guarda payment_id y payment_reference (para el webhook)."
+          }
+        },
+        {
+          "name": "Payment Webhook (fake)",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "X-Fake-Signature", "value": "{{webhook_secret}}" }],
+            "url": "{{base_url}}/payments/webhook",
+            "body": { "mode": "raw", "raw": "{\n  \"reference\": \"{{payment_reference}}\",\n  \"status\": \"APPROVED\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Simula la confirmación del proveedor (modo fake). Marca la compra como PAID y crea la inscripción."
+          }
+        },
+        { "name": "Get Payment", "request": { "method": "GET", "url": "{{base_url}}/payments/{{payment_id}}" } }
+      ]
+    },
+    {
+      "name": "Enrollments",
+      "item": [
+        { "name": "Get Enrollment", "request": { "method": "GET", "url": "{{base_url}}/enrollments/{{enrollment_id}}" } },
+        { "name": "Enrollment Access (WhatsApp/Meet)", "request": { "method": "GET", "url": "{{base_url}}/enrollments/{{enrollment_id}}/access" } }
+      ]
+    },
+    {
+      "name": "Admin",
+      "description": "Requiere token de un usuario con rol ADMIN (haz Login con admin@sevanna.co).",
+      "item": [
+        {
+          "name": "List Courses (Admin)",
+          "request": { "method": "GET", "url": { "raw": "{{base_url}}/admin/courses?page=1&limit=20", "host": ["{{base_url}}"], "path": ["admin", "courses"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } }
+        },
+        {
+          "name": "Create Course",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const j = pm.response.json();", "if (j && j.data) {", "  pm.collectionVariables.set('course_id', j.data.id);", "  pm.collectionVariables.set('course_slug', j.data.slug);", "}"] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/admin/courses",
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Velas Aromáticas Artesanales\",\n  \"short_description\": \"Crea velas naturales de soja\",\n  \"description\": \"Curso completo de elaboración de velas.\",\n  \"objective\": \"Elaborar velas seguras y decorativas\",\n  \"modality\": \"ONLINE\",\n  \"level\": \"BEGINNER\",\n  \"duration\": \"3 semanas\",\n  \"price\": \"120000.00\",\n  \"currency\": \"COP\",\n  \"materials\": { \"included\": [\"Guía PDF\"], \"required\": [\"Cera de soja\", \"Mechas\"] },\n  \"learning_outcomes\": [\"Fundir y aromatizar\", \"Moldear velas\"],\n  \"status\": \"PUBLISHED\",\n  \"whatsapp_group_url\": \"https://chat.whatsapp.com/velas\",\n  \"google_meet_url\": \"https://meet.google.com/velas\"\n}", "options": { "raw": { "language": "json" } } },
+            "description": "Crea un curso. Guarda course_id y course_slug para el resto del flujo."
+          }
+        },
+        { "name": "Get Course (Admin)", "request": { "method": "GET", "url": "{{base_url}}/admin/courses/{{course_id}}" } },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/admin/courses/{{course_id}}",
+            "body": { "mode": "raw", "raw": "{\n  \"price\": \"135000.00\",\n  \"status\": \"PUBLISHED\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        { "name": "Delete Course", "request": { "method": "DELETE", "url": "{{base_url}}/admin/courses/{{course_id}}" } },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{base_url}}/admin/categories",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Velas\",\n  \"description\": \"Velas artesanales\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        { "name": "List Users", "request": { "method": "GET", "url": { "raw": "{{base_url}}/admin/users?page=1&limit=20", "host": ["{{base_url}}"], "path": ["admin", "users"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "List Purchases", "request": { "method": "GET", "url": { "raw": "{{base_url}}/admin/purchases?page=1&limit=20", "host": ["{{base_url}}"], "path": ["admin", "purchases"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } },
+        { "name": "List Enrollments", "request": { "method": "GET", "url": { "raw": "{{base_url}}/admin/enrollments?page=1&limit=20", "host": ["{{base_url}}"], "path": ["admin", "enrollments"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "20" }] } } }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        { "name": "Health", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{base_url}}/health" } },
+        { "name": "Liveness", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{base_url}}/health/live" } },
+        { "name": "Readiness", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{base_url}}/health/ready" } }
+      ]
+    }
+  ]
+}

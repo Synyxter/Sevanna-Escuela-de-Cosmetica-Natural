@@ -20,8 +20,14 @@ from app.services.enrollment_service import EnrollmentService
 from app.services.purchase_service import PurchaseService
 from app.services.user_service import UserService
 
-# Every route here requires an authenticated admin (dependency at router level).
-router = APIRouter(prefix="/admin", tags=["admin"], dependencies=[])
+# Always-on admin surface: course + category management. Every route requires
+# an authenticated admin (enforced per-endpoint via the CurrentAdmin dependency).
+router = APIRouter(prefix="/admin", tags=["admin"])
+
+# Admin listings for the deprecated modules — mounted only when their feature
+# flag is on. Kept intact for a possible future reactivation.
+accounts_router = APIRouter(prefix="/admin", tags=["admin"])  # ENABLE_ACCOUNTS
+commerce_router = APIRouter(prefix="/admin", tags=["admin"])  # ENABLE_COMMERCE
 
 
 # --- Courses --------------------------------------------------------------- #
@@ -102,8 +108,8 @@ async def create_category(
     )
 
 
-# --- Users ----------------------------------------------------------------- #
-@router.get("/users", response_model=SuccessResponse[Page[UserResponse]])
+# --- Users (accounts module) ----------------------------------------------- #
+@accounts_router.get("/users", response_model=SuccessResponse[Page[UserResponse]])
 async def list_users(
     _admin: CurrentAdmin,
     session: DBSession,
@@ -116,8 +122,8 @@ async def list_users(
     return SuccessResponse(data=build_page(items, total=total, page=page, limit=limit))
 
 
-# --- Purchases ------------------------------------------------------------- #
-@router.get("/purchases", response_model=SuccessResponse[Page[AdminPurchaseItem]])
+# --- Purchases (commerce module) ------------------------------------------- #
+@commerce_router.get("/purchases", response_model=SuccessResponse[Page[AdminPurchaseItem]])
 async def list_purchases(
     _admin: CurrentAdmin,
     session: DBSession,
@@ -146,8 +152,8 @@ async def list_purchases(
     return SuccessResponse(data=build_page(items, total=total, page=page, limit=limit))
 
 
-# --- Enrollments ----------------------------------------------------------- #
-@router.get("/enrollments", response_model=SuccessResponse[Page[AdminEnrollmentItem]])
+# --- Enrollments (commerce module) ----------------------------------------- #
+@commerce_router.get("/enrollments", response_model=SuccessResponse[Page[AdminEnrollmentItem]])
 async def list_enrollments(
     _admin: CurrentAdmin,
     session: DBSession,

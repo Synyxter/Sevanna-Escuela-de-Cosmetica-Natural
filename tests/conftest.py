@@ -8,18 +8,31 @@ same in-memory schema/data. The payment/email providers default to
 
 from __future__ import annotations
 
-from collections.abc import AsyncGenerator
+import os
 
-import pytest
-import pytest_asyncio
-from httpx import ASGITransport, AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.pool import StaticPool
+# The accounts/commerce modules are disabled by default (catalog-only backend).
+# Enable them BEFORE importing the app so their routers are mounted and the
+# suite keeps exercising the preserved code. Must run before app.core.config
+# instantiates its cached settings.
+os.environ.setdefault("ENABLE_ACCOUNTS", "true")
+os.environ.setdefault("ENABLE_COMMERCE", "true")
 
-from app.core.config import settings
-from app.core.database import get_db
-from app.main import app
-from app.models import Base
+from collections.abc import AsyncGenerator  # noqa: E402
+
+import pytest  # noqa: E402
+import pytest_asyncio  # noqa: E402
+from httpx import ASGITransport, AsyncClient  # noqa: E402
+from sqlalchemy.ext.asyncio import (  # noqa: E402
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
+from sqlalchemy.pool import StaticPool  # noqa: E402
+
+from app.core.config import settings  # noqa: E402
+from app.core.database import get_db  # noqa: E402
+from app.main import app  # noqa: E402
+from app.models import Base  # noqa: E402
 
 # Disable rate limiting during tests (state is process-global otherwise).
 settings.rate_limit_enabled = False
