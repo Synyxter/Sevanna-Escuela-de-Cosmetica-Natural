@@ -111,6 +111,22 @@ class Settings(BaseSettings):
             return [item.strip() for item in value.split(",") if item.strip()]
         return value
 
+    @field_validator("database_url", mode="after")
+    @classmethod
+    def _normalize_db_url(cls, value: str) -> str:
+        """Ensure the async driver is used.
+
+        Managed providers (Render, Heroku, etc.) hand out URLs like
+        ``postgres://...`` or ``postgresql://...``; SQLAlchemy's async engine
+        requires the ``postgresql+asyncpg://`` scheme. Normalize it here so the
+        provider's DATABASE_URL can be used verbatim.
+        """
+        if value.startswith("postgres://"):
+            return "postgresql+asyncpg://" + value[len("postgres://") :]
+        if value.startswith("postgresql://"):
+            return "postgresql+asyncpg://" + value[len("postgresql://") :]
+        return value
+
     @property
     def is_production(self) -> bool:
         return self.app_env == "production"

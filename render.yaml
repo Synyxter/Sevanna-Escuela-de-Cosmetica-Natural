@@ -1,0 +1,61 @@
+# Render Blueprint para Sevanna (API FastAPI + PostgreSQL).
+# En Render: New + > Blueprint > conecta este repositorio. Render leerá este
+# archivo y creará la base de datos y el servicio web. Las variables marcadas
+# como "sync: false" se definen manualmente en el dashboard (son específicas o
+# secretas). Ver docs/DESPLIEGUE_RENDER.md.
+
+databases:
+  - name: sevanna-db
+    databaseName: sevanna
+    user: sevanna
+    region: virginia
+    plan: free            # Gratis por ~30 días. Para producción usa un plan de pago.
+
+services:
+  - type: web
+    name: sevanna-api
+    runtime: docker
+    region: virginia       # Debe coincidir con la región de la base de datos.
+    plan: free             # Se "duerme" por inactividad. Sube de plan para evitarlo.
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+    envVars:
+      # Conexión a la base (Render inyecta la URL; la app la normaliza a asyncpg).
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sevanna-db
+          property: connectionString
+      # Secreto JWT generado automáticamente por Render.
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: ENABLE_DOCS
+        value: "true"          # ponlo en "false" si no quieres /docs público
+      # Catálogo: módulos de cuentas y comercio desactivados (inscripción por WhatsApp).
+      - key: ENABLE_ACCOUNTS
+        value: "false"
+      - key: ENABLE_COMMERCE
+        value: "false"
+      - key: PAYMENT_PROVIDER
+        value: fake
+      - key: EMAIL_PROVIDER
+        value: console
+      # Dominios del frontend (defínelos en el dashboard cuando los tengas).
+      - key: CORS_ORIGINS
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      # Admin inicial (la contraseña se define manualmente como secreto).
+      - key: FIRST_ADMIN_EMAIL
+        value: admin@sevanna.co
+      - key: FIRST_ADMIN_NAME
+        value: Administrador Sevanna
+      - key: FIRST_ADMIN_PASSWORD
+        sync: false
