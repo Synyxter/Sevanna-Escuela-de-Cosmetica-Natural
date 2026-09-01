@@ -1,0 +1,884 @@
+{
+  "categories": [
+    "Maquillaje natural",
+    "Jabonería",
+    "Velas",
+    "Fitocosmética",
+    "Cuidado capilar",
+    "Perfumería",
+    "Cuidado corporal",
+    "Cuidado personal",
+    "Hogar y limpieza"
+  ],
+  "courses": [
+    {
+      "title": "Curso de Maquillaje Natural",
+      "category": "Maquillaje natural",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "360000.00",
+      "currency": "COP",
+      "short_description": "Formula y aplica maquillaje mineral con ingredientes naturales.",
+      "description": "Aprende a formular y elaborar bases, polvos, rubores y sombras con pigmentos minerales y activos naturales, cuidando la piel mientras logras acabados profesionales.",
+      "objective": "Elaborar una línea básica de maquillaje natural apta para diferentes tipos de piel.",
+      "learning_outcomes": [
+        "Selección de pigmentos minerales",
+        "Formulación de bases y polvos",
+        "Técnicas de aplicación y color"
+      ],
+      "materials": {
+        "included": [
+          "Guía de formulación",
+          "Recetario base"
+        ],
+        "required": [
+          "Pigmentos minerales",
+          "Bases y polvos",
+          "Pinceles"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Natural",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "BEGINNER",
+      "duration": "8 horas",
+      "price": "320000.00",
+      "currency": "COP",
+      "short_description": "Fundamentos de la saponificación en frío para jabones naturales.",
+      "description": "Curso introductorio a la elaboración de jabones artesanales por saponificación en frío, con foco en seguridad, formulación básica y curado.",
+      "objective": "Elaborar tus primeros jabones naturales de forma segura y reproducible.",
+      "learning_outcomes": [
+        "Entender la saponificación",
+        "Manejo seguro de la soda",
+        "Formular recetas propias"
+      ],
+      "materials": {
+        "included": [
+          "Guía PDF",
+          "Plantillas de recetas"
+        ],
+        "required": [
+          "Aceites base",
+          "Soda cáustica",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Velas de Arte",
+      "category": "Velas",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Velas decorativas y artísticas con ceras naturales.",
+      "description": "Diseña y elabora velas artísticas y decorativas con cera de soja y aromas, explorando moldes, capas, colores y acabados.",
+      "objective": "Crear velas decorativas de calidad para uso o venta.",
+      "learning_outcomes": [
+        "Fundido y aromatizado",
+        "Técnicas decorativas y capas",
+        "Moldeo y acabado"
+      ],
+      "materials": {
+        "included": [
+          "Guía de técnicas"
+        ],
+        "required": [
+          "Cera de soja",
+          "Mechas",
+          "Aromas y colorantes",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Fitocosmética",
+      "category": "Fitocosmética",
+      "modality": "HYBRID",
+      "level": "ADVANCED",
+      "duration": "10 horas",
+      "price": "390000.00",
+      "currency": "COP",
+      "short_description": "Cosmética con activos botánicos: extractos, aceites y formulación.",
+      "description": "Formulación avanzada de cosmética natural a partir de plantas: extractos, macerados, aceites e hidrolatos aplicados a cremas y sérums.",
+      "objective": "Formular cosmética facial y corporal con activos botánicos estables.",
+      "learning_outcomes": [
+        "Extracción de activos vegetales",
+        "Formulación de emulsiones",
+        "Conservación y estabilidad"
+      ],
+      "materials": {
+        "included": [
+          "Guía de formulación",
+          "Fichas de activos"
+        ],
+        "required": [
+          "Aceites y mantecas",
+          "Extractos e hidrolatos",
+          "Emulsionantes y conservantes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Champú y Tratamiento Capilar",
+      "category": "Cuidado capilar",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "360000.00",
+      "currency": "COP",
+      "short_description": "Champús y tratamientos capilares naturales.",
+      "description": "Elabora champús, acondicionadores y tratamientos capilares con tensioactivos suaves y activos naturales según tipo de cabello.",
+      "objective": "Formular una línea básica de cuidado capilar natural.",
+      "learning_outcomes": [
+        "Tensioactivos suaves",
+        "Balance para tipos de cabello",
+        "Tratamientos y mascarillas"
+      ],
+      "materials": {
+        "included": [
+          "Recetario capilar"
+        ],
+        "required": [
+          "Tensioactivos",
+          "Activos y aceites",
+          "Envases"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Perfumería",
+      "category": "Perfumería",
+      "modality": "HYBRID",
+      "level": "ADVANCED",
+      "duration": "10 horas",
+      "price": "400000.00",
+      "currency": "COP",
+      "short_description": "Construcción de fragancias: pirámide olfativa y acordes.",
+      "description": "Aprende la estructura de un perfume (notas de salida, corazón y fondo), la creación de acordes y el equilibrio de fragancias naturales.",
+      "objective": "Crear una fragancia propia balanceada y estable.",
+      "learning_outcomes": [
+        "Pirámide olfativa",
+        "Creación de acordes",
+        "Dilución y maceración"
+      ],
+      "materials": {
+        "included": [
+          "Guía de perfumería",
+          "Ficha de notas"
+        ],
+        "required": [
+          "Esencias y absolutos",
+          "Alcohol perfumero",
+          "Probetas y frascos"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Sales de Baño",
+      "category": "Cuidado corporal",
+      "modality": "HYBRID",
+      "level": "BEGINNER",
+      "duration": "8 horas",
+      "price": "300000.00",
+      "currency": "COP",
+      "short_description": "Sales de baño aromáticas y relajantes.",
+      "description": "Elabora sales de baño con sales minerales, aromas y botánicos para experiencias relajantes y de spa en casa.",
+      "objective": "Crear sales de baño listas para uso o venta.",
+      "learning_outcomes": [
+        "Mezcla de sales y minerales",
+        "Aromatización",
+        "Presentación y empaque"
+      ],
+      "materials": {
+        "included": [
+          "Recetario"
+        ],
+        "required": [
+          "Sales (Epsom, marina)",
+          "Aceites esenciales",
+          "Botánicos y envases"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Labiales Veganos",
+      "category": "Maquillaje natural",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "340000.00",
+      "currency": "COP",
+      "short_description": "Labiales y bálsamos veganos con ceras vegetales.",
+      "description": "Formula labiales y bálsamos labiales veganos con ceras vegetales, mantecas y pigmentos, logrando textura y color estables.",
+      "objective": "Elaborar labiales veganos con buen acabado y fijación.",
+      "learning_outcomes": [
+        "Ceras vegetales",
+        "Pigmentación",
+        "Moldeo de labiales"
+      ],
+      "materials": {
+        "included": [
+          "Recetario"
+        ],
+        "required": [
+          "Ceras vegetales",
+          "Mantecas",
+          "Pigmentos y moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Jelly Terapéutico",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Jabones tipo jelly con activos de cuidado.",
+      "description": "Elabora jabones jelly (gelatinosos) con activos suaves y aromas, una presentación divertida y con propiedades de cuidado de la piel.",
+      "objective": "Dominar la textura jelly y la incorporación de activos.",
+      "learning_outcomes": [
+        "Base gelificante",
+        "Incorporación de activos",
+        "Moldeo y conservación"
+      ],
+      "materials": {
+        "included": [
+          "Recetario jelly"
+        ],
+        "required": [
+          "Base gelificante",
+          "Activos y aromas",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Aclarante para Manchas",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "360000.00",
+      "currency": "COP",
+      "short_description": "Jabones con activos para unificar el tono de la piel.",
+      "description": "Formula jabones con activos naturales orientados a manchas y unificación del tono, cuidando concentraciones seguras.",
+      "objective": "Elaborar jabones con activos aclarantes de forma segura.",
+      "learning_outcomes": [
+        "Activos para manchas",
+        "Concentraciones seguras",
+        "Formulación y curado"
+      ],
+      "materials": {
+        "included": [
+          "Fichas de activos"
+        ],
+        "required": [
+          "Base de jabón",
+          "Activos (p. ej. niacinamida, vitamina C)",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón de Carbón Activado",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Jabones purificantes con carbón activado.",
+      "description": "Elabora jabones detox con carbón activado para pieles mixtas y grasas, controlando dosis, color y exfoliación.",
+      "objective": "Formular jabones de carbón activado equilibrados.",
+      "learning_outcomes": [
+        "Dosificación del carbón",
+        "Formulación para piel grasa",
+        "Acabado y presentación"
+      ],
+      "materials": {
+        "included": [
+          "Recetario"
+        ],
+        "required": [
+          "Carbón activado",
+          "Aceites base",
+          "Soda cáustica",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón para Mascotas",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "BEGINNER",
+      "duration": "8 horas",
+      "price": "320000.00",
+      "currency": "COP",
+      "short_description": "Jabones suaves y seguros para mascotas.",
+      "description": "Formula jabones y barras de limpieza suaves y de pH adecuado para mascotas, con ingredientes seguros y aromas aptos.",
+      "objective": "Elaborar jabones seguros para el cuidado de mascotas.",
+      "learning_outcomes": [
+        "Ingredientes seguros para mascotas",
+        "pH y suavidad",
+        "Formulación y curado"
+      ],
+      "materials": {
+        "included": [
+          "Recetario mascotas"
+        ],
+        "required": [
+          "Aceites suaves",
+          "Soda cáustica",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Decorativo",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "340000.00",
+      "currency": "COP",
+      "short_description": "Jabones artísticos y decorativos.",
+      "description": "Técnicas decorativas en jabón: capas, remolinos (swirls), incrustaciones y colores para piezas artísticas.",
+      "objective": "Crear jabones decorativos con acabados profesionales.",
+      "learning_outcomes": [
+        "Swirls y capas",
+        "Color y contraste",
+        "Diseño y presentación"
+      ],
+      "materials": {
+        "included": [
+          "Guía de técnicas decorativas"
+        ],
+        "required": [
+          "Base de jabón",
+          "Colorantes",
+          "Moldes y utensilios"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Macerado",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Jabones con aceites macerados en botánicos.",
+      "description": "Aprende a preparar aceites macerados con plantas y flores para incorporarlos a jabones artesanales con propiedades y aroma naturales.",
+      "objective": "Elaborar jabones a partir de macerados botánicos.",
+      "learning_outcomes": [
+        "Maceración de aceites",
+        "Filtrado y conservación",
+        "Formulación del jabón"
+      ],
+      "materials": {
+        "included": [
+          "Guía de macerados"
+        ],
+        "required": [
+          "Aceites base",
+          "Botánicos secos",
+          "Soda cáustica",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón de Olato",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "340000.00",
+      "currency": "COP",
+      "short_description": "Elaboración de jabón artesanal (técnica de olato).",
+      "description": "Curso práctico de elaboración de este tipo de jabón artesanal, desde la preparación de la base hasta el moldeado, con foco en seguridad y presentación.",
+      "objective": "Elaborar jabones con esta técnica de forma segura y reproducible.",
+      "learning_outcomes": [
+        "Preparación de la base",
+        "Formulación",
+        "Moldeo y curado"
+      ],
+      "materials": {
+        "included": [
+          "Recetario"
+        ],
+        "required": [
+          "Aceites base",
+          "Soda cáustica",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Melt & Pour",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "BEGINNER",
+      "duration": "8 horas",
+      "price": "310000.00",
+      "currency": "COP",
+      "short_description": "Jabones con base de derretir y verter (melt & pour).",
+      "description": "Elabora jabones de forma sencilla y segura con base melt & pour, ideal para principiantes: color, aroma y moldeo sin manejar soda cáustica.",
+      "objective": "Crear jabones melt & pour listos para uso o venta.",
+      "learning_outcomes": [
+        "Uso de base melt & pour",
+        "Color y aroma",
+        "Moldeo y presentación"
+      ],
+      "materials": {
+        "included": [
+          "Recetario"
+        ],
+        "required": [
+          "Base melt & pour",
+          "Colorantes y aromas",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Crema",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Jabones cremosos y suaves para la piel.",
+      "description": "Formula jabones tipo crema con alta cremosidad y suavidad, equilibrando aceites y activos hidratantes.",
+      "objective": "Elaborar jabones crema con textura y espuma de calidad.",
+      "learning_outcomes": [
+        "Balance de aceites",
+        "Cremosidad y espuma",
+        "Activos hidratantes"
+      ],
+      "materials": {
+        "included": [
+          "Recetario"
+        ],
+        "required": [
+          "Aceites y mantecas",
+          "Soda cáustica",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Jabón Gema",
+      "category": "Jabonería",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Jabones tipo gema/cristal con cortes facetados.",
+      "description": "Crea jabones con aspecto de gemas y cristales mediante cortes facetados, transparencias y color, para piezas de alto impacto visual.",
+      "objective": "Elaborar jabones gema con acabado tipo cristal.",
+      "learning_outcomes": [
+        "Bases transparentes",
+        "Cortes facetados",
+        "Color y capas"
+      ],
+      "materials": {
+        "included": [
+          "Guía de técnica gema"
+        ],
+        "required": [
+          "Base transparente",
+          "Colorantes",
+          "Herramientas de corte"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Ritual Capilar para Caída de Cabello",
+      "category": "Cuidado capilar",
+      "modality": "HYBRID",
+      "level": "ADVANCED",
+      "duration": "10 horas",
+      "price": "380000.00",
+      "currency": "COP",
+      "short_description": "Protocolo y productos para fortalecer el cabello.",
+      "description": "Diseña un ritual capilar completo con tónicos, mascarillas y aceites orientados a fortalecer el cabello y reducir la caída.",
+      "objective": "Formular y aplicar un ritual capilar anticaída.",
+      "learning_outcomes": [
+        "Activos fortalecedores",
+        "Tónicos y aceites",
+        "Protocolo de aplicación"
+      ],
+      "materials": {
+        "included": [
+          "Protocolo capilar"
+        ],
+        "required": [
+          "Activos anticaída",
+          "Aceites y tónicos",
+          "Envases"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Velas Fenol",
+      "category": "Velas",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Elaboración de velas (técnica fenol).",
+      "description": "Curso práctico de elaboración de velas con esta técnica, cubriendo ceras, aromatización, mechado y acabado.",
+      "objective": "Elaborar velas con esta técnica de forma segura y reproducible.",
+      "learning_outcomes": [
+        "Selección de ceras",
+        "Aromatización y mechado",
+        "Moldeo y acabado"
+      ],
+      "materials": {
+        "included": [
+          "Guía de técnicas"
+        ],
+        "required": [
+          "Cera",
+          "Mechas",
+          "Aromas",
+          "Moldes"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Maquillaje Vegano",
+      "category": "Maquillaje natural",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "360000.00",
+      "currency": "COP",
+      "short_description": "Maquillaje 100% vegano y libre de crueldad.",
+      "description": "Formula productos de maquillaje veganos (bases, labiales, sombras) con ingredientes de origen vegetal y mineral, sin derivados animales.",
+      "objective": "Elaborar una línea de maquillaje vegano.",
+      "learning_outcomes": [
+        "Ingredientes veganos",
+        "Formulación de color",
+        "Buenas prácticas cruelty-free"
+      ],
+      "materials": {
+        "included": [
+          "Recetario vegano"
+        ],
+        "required": [
+          "Pigmentos",
+          "Ceras vegetales",
+          "Bases y envases"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Tintes Naturales",
+      "category": "Cuidado capilar",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "350000.00",
+      "currency": "COP",
+      "short_description": "Coloración capilar con tintes de origen natural.",
+      "description": "Aprende a preparar y aplicar tintes naturales (como henna y mezclas botánicas) para colorar el cabello cuidando la fibra.",
+      "objective": "Aplicar tintes naturales con resultados predecibles.",
+      "learning_outcomes": [
+        "Tintes botánicos",
+        "Preparación de mezclas",
+        "Aplicación y fijación"
+      ],
+      "materials": {
+        "included": [
+          "Guía de coloración natural"
+        ],
+        "required": [
+          "Henna y botánicos",
+          "Utensilios de aplicación"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Cierre de Cabello",
+      "category": "Cuidado capilar",
+      "modality": "HYBRID",
+      "level": "INTERMEDIATE",
+      "duration": "9 horas",
+      "price": "360000.00",
+      "currency": "COP",
+      "short_description": "Tratamiento de sellado/cierre de la fibra capilar.",
+      "description": "Técnica de cierre capilar para sellar la cutícula tras tratamientos, aportando brillo, suavidad y durabilidad al cuidado.",
+      "objective": "Aplicar el cierre capilar como paso final de tratamiento.",
+      "learning_outcomes": [
+        "Sellado de cutícula",
+        "Productos de cierre",
+        "Protocolo paso a paso"
+      ],
+      "materials": {
+        "included": [
+          "Protocolo"
+        ],
+        "required": [
+          "Productos de sellado",
+          "Herramientas"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Técnica de Cepillado",
+      "category": "Cuidado capilar",
+      "modality": "HYBRID",
+      "level": "BEGINNER",
+      "duration": "8 horas",
+      "price": "300000.00",
+      "currency": "COP",
+      "short_description": "Técnicas correctas de cepillado y cuidado del cabello.",
+      "description": "Aprende técnicas de cepillado, desenredado y manejo del cabello para evitar daño y potenciar los tratamientos.",
+      "objective": "Dominar el cepillado correcto según tipo de cabello.",
+      "learning_outcomes": [
+        "Herramientas adecuadas",
+        "Técnica por tipo de cabello",
+        "Cuidado y prevención de daño"
+      ],
+      "materials": {
+        "included": [
+          "Guía práctica"
+        ],
+        "required": [
+          "Cepillos y peines"
+        ]
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de Productos Spa",
+      "category": "Cuidado corporal",
+      "modality": "PRESENTIAL",
+      "level": "BEGINNER",
+      "duration": "4 horas",
+      "price": "300000.00",
+      "currency": "COP",
+      "short_description": "Elabora productos de spa para consentir la piel.",
+      "description": "Taller práctico para crear varios productos de spa (exfoliantes, mascarillas, aceites) en una sola sesión.",
+      "objective": "Salir con productos de spa hechos por ti.",
+      "learning_outcomes": [
+        "Exfoliantes y mascarillas",
+        "Aromaterapia básica",
+        "Presentación"
+      ],
+      "materials": {
+        "included": [
+          "Todos los insumos de la sesión",
+          "Envases"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de Velas",
+      "category": "Velas",
+      "modality": "PRESENTIAL",
+      "level": "BEGINNER",
+      "duration": "4 horas",
+      "price": "300000.00",
+      "currency": "COP",
+      "short_description": "Crea tus propias velas aromáticas en una sesión.",
+      "description": "Taller introductorio para elaborar velas aromáticas con cera de soja, aromas y moldes, llevándote tus creaciones.",
+      "objective": "Elaborar velas aromáticas desde cero.",
+      "learning_outcomes": [
+        "Fundido y mechado",
+        "Aromatización",
+        "Moldeo"
+      ],
+      "materials": {
+        "included": [
+          "Cera, mechas, aromas y moldes"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de Exfoliación: Aceites y Mantecas",
+      "category": "Cuidado corporal",
+      "modality": "PRESENTIAL",
+      "level": "BEGINNER",
+      "duration": "4 horas",
+      "price": "310000.00",
+      "currency": "COP",
+      "short_description": "Exfoliantes corporales con aceites y mantecas naturales.",
+      "description": "Taller práctico para elaborar exfoliantes corporales nutritivos con aceites, mantecas y azúcares/sales.",
+      "objective": "Crear exfoliantes corporales listos para usar.",
+      "learning_outcomes": [
+        "Mezcla de aceites y mantecas",
+        "Exfoliantes en azúcar/sal",
+        "Aromatización"
+      ],
+      "materials": {
+        "included": [
+          "Aceites, mantecas, exfoliantes y envases"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de San Valentín",
+      "category": "Cuidado corporal",
+      "modality": "PRESENTIAL",
+      "level": "BEGINNER",
+      "duration": "4 horas",
+      "price": "300000.00",
+      "currency": "COP",
+      "short_description": "Kit temático de productos para regalar en San Valentín.",
+      "description": "Taller temático para elaborar un set de productos (velas, jabones o cosmética) ideales para regalar en San Valentín.",
+      "objective": "Salir con un kit de regalo elaborado por ti.",
+      "learning_outcomes": [
+        "Productos temáticos",
+        "Aromas y colores",
+        "Empaque para regalo"
+      ],
+      "materials": {
+        "included": [
+          "Insumos del kit y empaque"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de Perfumería",
+      "category": "Perfumería",
+      "modality": "PRESENTIAL",
+      "level": "INTERMEDIATE",
+      "duration": "5 horas",
+      "price": "340000.00",
+      "currency": "COP",
+      "short_description": "Crea tu propia fragancia en una sesión guiada.",
+      "description": "Taller práctico de perfumería: descubre notas olfativas y compón tu fragancia personalizada para llevar.",
+      "objective": "Salir con una fragancia propia elaborada.",
+      "learning_outcomes": [
+        "Notas olfativas",
+        "Composición de un acorde",
+        "Dilución"
+      ],
+      "materials": {
+        "included": [
+          "Esencias, alcohol perfumero y frasco"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de Productos de Limpieza",
+      "category": "Hogar y limpieza",
+      "modality": "PRESENTIAL",
+      "level": "BEGINNER",
+      "duration": "4 horas",
+      "price": "300000.00",
+      "currency": "COP",
+      "short_description": "Limpiadores del hogar naturales y ecológicos.",
+      "description": "Taller para elaborar limpiadores multiusos, desengrasantes y aromatizantes del hogar con ingredientes naturales y económicos.",
+      "objective": "Elaborar productos de limpieza naturales para el hogar.",
+      "learning_outcomes": [
+        "Limpiadores multiusos",
+        "Desengrasantes",
+        "Aromatización natural"
+      ],
+      "materials": {
+        "included": [
+          "Insumos y envases de la sesión"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de Desodorantes",
+      "category": "Cuidado personal",
+      "modality": "PRESENTIAL",
+      "level": "BEGINNER",
+      "duration": "3 horas",
+      "price": "300000.00",
+      "currency": "COP",
+      "short_description": "Desodorantes naturales sin sales de aluminio.",
+      "description": "Taller para elaborar desodorantes naturales (en barra o crema) efectivos y libres de sales de aluminio.",
+      "objective": "Crear tu desodorante natural personalizado.",
+      "learning_outcomes": [
+        "Bases naturales",
+        "Activos desodorantes",
+        "Aromatización"
+      ],
+      "materials": {
+        "included": [
+          "Insumos y envases de la sesión"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Taller de Depilación Orgánica",
+      "category": "Cuidado personal",
+      "modality": "PRESENTIAL",
+      "level": "INTERMEDIATE",
+      "duration": "4 horas",
+      "price": "330000.00",
+      "currency": "COP",
+      "short_description": "Depilación con cera natural (española/azúcar).",
+      "description": "Taller práctico de depilación orgánica con cera natural y pasta de azúcar, técnica de aplicación y cuidado de la piel.",
+      "objective": "Aplicar técnicas de depilación orgánica de forma segura.",
+      "learning_outcomes": [
+        "Preparación de la cera/pasta",
+        "Técnica de aplicación",
+        "Cuidado post-depilación"
+      ],
+      "materials": {
+        "included": [
+          "Insumos de la sesión"
+        ],
+        "required": []
+      },
+      "status": "PUBLISHED"
+    }
+  ]
+}
