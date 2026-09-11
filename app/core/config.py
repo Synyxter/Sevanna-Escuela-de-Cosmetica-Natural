@@ -69,6 +69,10 @@ class Settings(BaseSettings):
     enable_accounts: bool = False
     enable_commerce: bool = False
 
+    # On startup, create the admin if missing and seed the catalog if empty
+    # (idempotent). Lets a fresh production DB populate itself on first boot.
+    auto_seed: bool = True
+
     # --- Payment provider ---
     payment_provider: Literal["wompi", "fake"] = "fake"
     payment_api_key: str = ""
