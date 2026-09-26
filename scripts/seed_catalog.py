@@ -50,9 +50,16 @@ async def seed_catalog() -> None:
         # --- Courses (idempotent by slug) ---
         created_courses = 0
         skipped = 0
+        images_filled = 0
         for item in data["courses"]:
             slug = slugify(item["title"])
-            if await courses.get_by_slug(slug):
+            existing = await courses.get_by_slug(slug)
+            if existing:
+                # Backfill the image for courses created before images existed;
+                # never overwrite an image set later (e.g. by the admin).
+                if existing.image_url is None and item.get("image_url"):
+                    existing.image_url = item["image_url"]
+                    images_filled += 1
                 skipped += 1
                 continue
             course = Course(
@@ -78,7 +85,8 @@ async def seed_catalog() -> None:
         await session.commit()
         print(
             f"Categorías creadas: {created_cats} | "
-            f"Cursos creados: {created_courses} | Cursos omitidos (ya existían): {skipped}"
+            f"Cursos creados: {created_courses} | Cursos omitidos (ya existían): {skipped} | "
+            f"Imágenes asignadas: {images_filled}"
         )
 
 
