@@ -13,6 +13,7 @@
   "courses": [
     {
       "title": "Curso de Maquillaje Natural",
+      "image_url": "/images/cursos/curso1.jpg",
       "category": "Maquillaje natural",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -42,6 +43,7 @@
     },
     {
       "title": "Curso de Jabón Natural",
+      "image_url": "/images/cursos/curso2.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "BEGINNER",
@@ -71,6 +73,7 @@
     },
     {
       "title": "Curso de Velas de Arte",
+      "image_url": "/images/cursos/curso3.jpg",
       "category": "Velas",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -100,6 +103,7 @@
     },
     {
       "title": "Curso de Fitocosmética",
+      "image_url": "/images/cursos/curso4.jpg",
       "category": "Fitocosmética",
       "modality": "HYBRID",
       "level": "ADVANCED",
@@ -129,6 +133,7 @@
     },
     {
       "title": "Curso de Champú y Tratamiento Capilar",
+      "image_url": "/images/cursos/curso5.jpg",
       "category": "Cuidado capilar",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -157,6 +162,7 @@
     },
     {
       "title": "Curso de Perfumería",
+      "image_url": "/images/cursos/curso6.jpg",
       "category": "Perfumería",
       "modality": "HYBRID",
       "level": "ADVANCED",
@@ -186,6 +192,7 @@
     },
     {
       "title": "Curso de Sales de Baño",
+      "image_url": "/images/cursos/curso7.jpg",
       "category": "Cuidado corporal",
       "modality": "HYBRID",
       "level": "BEGINNER",
@@ -214,6 +221,7 @@
     },
     {
       "title": "Curso de Labiales Veganos",
+      "image_url": "/images/cursos/curso8.jpg",
       "category": "Maquillaje natural",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -242,6 +250,7 @@
     },
     {
       "title": "Curso de Jabón Jelly Terapéutico",
+      "image_url": "/images/cursos/curso9.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -270,6 +279,7 @@
     },
     {
       "title": "Curso de Jabón Aclarante para Manchas",
+      "image_url": "/images/cursos/curso10.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -298,6 +308,7 @@
     },
     {
       "title": "Curso de Jabón de Carbón Activado",
+      "image_url": "/images/cursos/curso11.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -327,6 +338,7 @@
     },
     {
       "title": "Curso de Jabón para Mascotas",
+      "image_url": "/images/cursos/curso12.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "BEGINNER",
@@ -355,6 +367,7 @@
     },
     {
       "title": "Curso de Jabón Decorativo",
+      "image_url": "/images/cursos/curso13.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -383,6 +396,7 @@
     },
     {
       "title": "Curso de Jabón Macerado",
+      "image_url": "/images/cursos/curso14.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -412,6 +426,7 @@
     },
     {
       "title": "Curso de Jabón de Olato",
+      "image_url": "/images/cursos/curso15.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -440,6 +455,7 @@
     },
     {
       "title": "Curso de Jabón Melt & Pour",
+      "image_url": "/images/cursos/curso16.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "BEGINNER",
@@ -468,6 +484,7 @@
     },
     {
       "title": "Curso de Jabón Crema",
+      "image_url": "/images/cursos/curso17.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -496,6 +513,7 @@
     },
     {
       "title": "Curso de Jabón Gema",
+      "image_url": "/images/cursos/curso18.jpg",
       "category": "Jabonería",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -524,6 +542,7 @@
     },
     {
       "title": "Curso de Ritual Capilar para Caída de Cabello",
+      "image_url": "/images/cursos/curso19.jpg",
       "category": "Cuidado capilar",
       "modality": "HYBRID",
       "level": "ADVANCED",
@@ -552,6 +571,7 @@
     },
     {
       "title": "Curso de Velas Fenol",
+      "image_url": "/images/cursos/curso20.jpg",
       "category": "Velas",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -581,6 +601,7 @@
     },
     {
       "title": "Curso de Maquillaje Vegano",
+      "image_url": "/images/cursos/curso21.jpg",
       "category": "Maquillaje natural",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -609,6 +630,7 @@
     },
     {
       "title": "Curso de Tintes Naturales",
+      "image_url": "/images/cursos/curso22.jpg",
       "category": "Cuidado capilar",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -636,6 +658,7 @@
     },
     {
       "title": "Curso de Cierre de Cabello",
+      "image_url": "/images/cursos/curso23.jpg",
       "category": "Cuidado capilar",
       "modality": "HYBRID",
       "level": "INTERMEDIATE",
@@ -663,6 +686,7 @@
     },
     {
       "title": "Curso de Técnica de Cepillado",
+      "image_url": "/images/cursos/curso24.jpg",
       "category": "Cuidado capilar",
       "modality": "HYBRID",
       "level": "BEGINNER",
@@ -689,6 +713,7 @@
     },
     {
       "title": "Taller de Productos Spa",
+      "image_url": "/images/cursos/curso25.jpg",
       "category": "Cuidado corporal",
       "modality": "PRESENTIAL",
       "level": "BEGINNER",
@@ -714,6 +739,7 @@
     },
     {
       "title": "Taller de Velas",
+      "image_url": "/images/cursos/curso26.jpg",
       "category": "Velas",
       "modality": "PRESENTIAL",
       "level": "BEGINNER",
@@ -738,6 +764,7 @@
     },
     {
       "title": "Taller de Exfoliación: Aceites y Mantecas",
+      "image_url": "/images/cursos/curso27.jpg",
       "category": "Cuidado corporal",
       "modality": "PRESENTIAL",
       "level": "BEGINNER",
@@ -762,6 +789,7 @@
     },
     {
       "title": "Taller de San Valentín",
+      "image_url": "/images/cursos/curso28.jpg",
       "category": "Cuidado corporal",
       "modality": "PRESENTIAL",
       "level": "BEGINNER",
@@ -786,6 +814,7 @@
     },
     {
       "title": "Taller de Perfumería",
+      "image_url": "/images/cursos/curso29.jpg",
       "category": "Perfumería",
       "modality": "PRESENTIAL",
       "level": "INTERMEDIATE",
@@ -810,6 +839,7 @@
     },
     {
       "title": "Taller de Productos de Limpieza",
+      "image_url": "/images/cursos/curso30.jpg",
       "category": "Hogar y limpieza",
       "modality": "PRESENTIAL",
       "level": "BEGINNER",
@@ -834,6 +864,7 @@
     },
     {
       "title": "Taller de Desodorantes",
+      "image_url": "/images/cursos/curso31.jpg",
       "category": "Cuidado personal",
       "modality": "PRESENTIAL",
       "level": "BEGINNER",
@@ -858,6 +889,7 @@
     },
     {
       "title": "Taller de Depilación Orgánica",
+      "image_url": "/images/cursos/curso32.jpg",
       "category": "Cuidado personal",
       "modality": "PRESENTIAL",
       "level": "INTERMEDIATE",

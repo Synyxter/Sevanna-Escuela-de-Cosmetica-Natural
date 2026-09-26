@@ -4,9 +4,10 @@ On application startup (see ``main.lifespan``) this ensures the deployment is
 usable out of the box:
 
 - Creates the initial admin (from settings) if it does not exist.
-- Seeds the course catalog from ``scripts/catalog_data.json`` **only when the
-  catalog is empty** — so a fresh production database (e.g. a new managed
-  PostgreSQL on Render) is populated automatically on first boot.
+- Syncs the course catalog from ``scripts/catalog_data.json``: creates any
+  missing categories/courses (so a fresh production database, e.g. a new
+  managed PostgreSQL on Render, is populated on first boot) and backfills
+  missing course images. Existing data and admin edits are never overwritten.
 
 Both steps are idempotent and never raise into startup: any failure is logged
 and the API still comes up. Disable with ``AUTO_SEED=false``.
@@ -53,11 +54,16 @@ async def bootstrap_data() -> None:
                 await session.execute(select(func.count(Course.id)))
             ).scalar_one()
 
-        if course_count == 0:
-            # Import lazily to avoid coupling app import to the scripts package.
-            from scripts.seed_catalog import seed_catalog
+        # Sync the catalog on every boot. It is idempotent: creates only missing
+        # categories/courses and backfills missing images, never duplicating or
+        # overwriting admin edits. Import lazily to avoid coupling app import to
+        # the scripts package.
+        from scripts.seed_catalog import seed_catalog
 
-            await seed_catalog()
-            logger.info("bootstrap: catalog seeded", extra={"event": "bootstrap_catalog"})
+        await seed_catalog()
+        logger.info(
+            "bootstrap: catalog synced",
+            extra={"event": "bootstrap_catalog", "courses_before": course_count},
+        )
     except Exception:  # noqa: BLE001 - never block startup on seeding
         logger.exception("bootstrap_data failed (API will still start)")
