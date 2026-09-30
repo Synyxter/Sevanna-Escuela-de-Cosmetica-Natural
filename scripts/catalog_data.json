@@ -8,7 +8,8 @@
     "Perfumería",
     "Cuidado corporal",
     "Cuidado personal",
-    "Hogar y limpieza"
+    "Hogar y limpieza",
+    "Bisutería"
   ],
   "courses": [
     {
@@ -909,6 +910,38 @@
           "Insumos de la sesión"
         ],
         "required": []
+      },
+      "status": "PUBLISHED"
+    },
+    {
+      "title": "Curso de Bisutería",
+      "image_url": "/images/cursos/curso33.jpg",
+      "category": "Bisutería",
+      "modality": "HYBRID",
+      "level": "BEGINNER",
+      "duration": "8 horas",
+      "price": "250000.00",
+      "currency": "COP",
+      "short_description": "Diseña y elabora tus propios accesorios artesanales.",
+      "description": "Aprende las técnicas base de la bisutería artesanal: armado de collares, pulseras y aretes con mostacillas, piedras naturales, semillas y alambre, cuidando acabados, cierres y presentación para uso propio o para la venta.",
+      "objective": "Elaborar una colección básica de accesorios artesanales listos para uso o venta.",
+      "learning_outcomes": [
+        "Herramientas y materiales de bisutería",
+        "Técnicas de ensartado, alambrismo y cierres",
+        "Diseño de collares, pulseras y aretes",
+        "Acabados y presentación para la venta"
+      ],
+      "materials": {
+        "included": [
+          "Guía de técnicas",
+          "Patrones de diseño"
+        ],
+        "required": [
+          "Alicates (punta, corte y redonda)",
+          "Hilo nylon y alambre",
+          "Mostacillas, piedras naturales o semillas",
+          "Broches, argollas y ganchos"
+        ]
       },
       "status": "PUBLISHED"
     }
