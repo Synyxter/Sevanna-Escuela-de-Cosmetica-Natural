@@ -571,36 +571,6 @@
       "status": "PUBLISHED"
     },
     {
-      "title": "Curso de Velas Fenol",
-      "image_url": "/images/cursos/curso20.jpg",
-      "category": "Velas",
-      "modality": "HYBRID",
-      "level": "INTERMEDIATE",
-      "duration": "9 horas",
-      "price": "350000.00",
-      "currency": "COP",
-      "short_description": "Elaboración de velas (técnica fenol).",
-      "description": "Curso práctico de elaboración de velas con esta técnica, cubriendo ceras, aromatización, mechado y acabado.",
-      "objective": "Elaborar velas con esta técnica de forma segura y reproducible.",
-      "learning_outcomes": [
-        "Selección de ceras",
-        "Aromatización y mechado",
-        "Moldeo y acabado"
-      ],
-      "materials": {
-        "included": [
-          "Guía de técnicas"
-        ],
-        "required": [
-          "Cera",
-          "Mechas",
-          "Aromas",
-          "Moldes"
-        ]
-      },
-      "status": "PUBLISHED"
-    },
-    {
       "title": "Curso de Maquillaje Vegano",
       "image_url": "/images/cursos/curso21.jpg",
       "category": "Maquillaje natural",
@@ -945,5 +915,8 @@
       },
       "status": "PUBLISHED"
     }
+  ],
+  "removed_slugs": [
+    "curso-de-velas-fenol"
   ]
 }

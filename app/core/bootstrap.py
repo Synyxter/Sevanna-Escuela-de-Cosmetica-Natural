@@ -6,8 +6,9 @@ usable out of the box:
 - Creates the initial admin (from settings) if it does not exist.
 - Syncs the course catalog from ``scripts/catalog_data.json``: creates any
   missing categories/courses (so a fresh production database, e.g. a new
-  managed PostgreSQL on Render, is populated on first boot) and backfills
-  missing course images. Existing data and admin edits are never overwritten.
+  managed PostgreSQL on Render, is populated on first boot), backfills missing
+  course images and retires courses listed in ``removed_slugs``. Existing data
+  and admin edits are never overwritten.
 
 Both steps are idempotent and never raise into startup: any failure is logged
 and the API still comes up. Disable with ``AUTO_SEED=false``.
