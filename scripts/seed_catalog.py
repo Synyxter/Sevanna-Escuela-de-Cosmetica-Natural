@@ -1,7 +1,9 @@
 """Seed the course catalog from ``scripts/catalog_data.json``.
 
 Idempotent: creates any missing categories and courses; skips items that already
-exist (categories by name, courses by generated slug). Run with:
+exist (categories by name, courses by generated slug). Courses listed under
+``removed_slugs`` are deleted (or archived if they have purchases/enrollments,
+to preserve history). Run with:
 
     python -m scripts.seed_catalog
 """
@@ -14,11 +16,14 @@ from decimal import Decimal
 from pathlib import Path
 
 from slugify import slugify
+from sqlalchemy import func, select
 
 from app.core.database import AsyncSessionLocal
 from app.models.category import Category
 from app.models.course import Course
+from app.models.enrollment import Enrollment
 from app.models.enums import CourseLevel, CourseModality, CourseStatus
+from app.models.purchase import Purchase
 from app.repositories.category_repository import CategoryRepository
 from app.repositories.course_repository import CourseRepository
 
@@ -46,6 +51,25 @@ async def seed_catalog() -> None:
                 await session.flush()
                 created_cats += 1
             name_to_id[name] = existing.id
+
+        # --- Removed courses (explicit list, never inferred) ---
+        removed_courses = 0
+        for slug in data.get("removed_slugs", []):
+            course = await courses.get_by_slug(slug)
+            if course is None:
+                continue
+            refs = 0
+            for model in (Purchase, Enrollment):
+                refs += (
+                    await session.execute(
+                        select(func.count(model.id)).where(model.course_id == course.id)
+                    )
+                ).scalar_one()
+            if refs:
+                course.status = CourseStatus.ARCHIVED  # keep financial history
+            else:
+                await session.delete(course)
+            removed_courses += 1
 
         # --- Courses (idempotent by slug) ---
         created_courses = 0
@@ -86,7 +110,7 @@ async def seed_catalog() -> None:
         print(
             f"Categorías creadas: {created_cats} | "
             f"Cursos creados: {created_courses} | Cursos omitidos (ya existían): {skipped} | "
-            f"Imágenes asignadas: {images_filled}"
+            f"Imágenes asignadas: {images_filled} | Cursos retirados: {removed_courses}"
         )
 
 
