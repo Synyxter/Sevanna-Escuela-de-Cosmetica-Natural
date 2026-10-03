@@ -8,11 +8,32 @@ from __future__ import annotations
 
 from functools import lru_cache
 from typing import Annotated, Literal
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 Environment = Literal["development", "testing", "staging", "production"]
+
+
+def _adapt_query_for_asyncpg(url: str) -> str:
+    """Translate libpq-style query params into ones asyncpg accepts.
+
+    Managed providers (Neon, Supabase, etc.) hand out URLs ending in
+    ``?sslmode=require&channel_binding=require``. asyncpg rejects both keywords
+    and fails at connect time, so ``sslmode`` becomes ``ssl`` (same values) and
+    ``channel_binding`` is dropped (asyncpg negotiates SCRAM on its own).
+    """
+    parts = urlsplit(url)
+    if not parts.query:
+        return url
+    params: list[tuple[str, str]] = []
+    for key, val in parse_qsl(parts.query, keep_blank_values=True):
+        if key == "sslmode":
+            params.append(("ssl", val))
+        elif key != "channel_binding":
+            params.append((key, val))
+    return urlunsplit(parts._replace(query=urlencode(params)))
 
 
 class Settings(BaseSettings):
@@ -126,9 +147,11 @@ class Settings(BaseSettings):
         provider's DATABASE_URL can be used verbatim.
         """
         if value.startswith("postgres://"):
-            return "postgresql+asyncpg://" + value[len("postgres://") :]
-        if value.startswith("postgresql://"):
-            return "postgresql+asyncpg://" + value[len("postgresql://") :]
+            value = "postgresql+asyncpg://" + value[len("postgres://") :]
+        elif value.startswith("postgresql://"):
+            value = "postgresql+asyncpg://" + value[len("postgresql://") :]
+        if value.startswith("postgresql+asyncpg://"):
+            value = _adapt_query_for_asyncpg(value)
         return value
 
     @property
