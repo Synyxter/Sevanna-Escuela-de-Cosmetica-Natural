@@ -1,32 +1,25 @@
-# Render Blueprint para Sevanna (API FastAPI + PostgreSQL).
+# Render Blueprint para Sevanna (API FastAPI).
 # En Render: New + > Blueprint > conecta este repositorio. Render leerá este
-# archivo y creará la base de datos y el servicio web. Las variables marcadas
-# como "sync: false" se definen manualmente en el dashboard (son específicas o
-# secretas). Ver docs/DESPLIEGUE_RENDER.md.
-
-databases:
-  - name: sevanna-db
-    databaseName: sevanna
-    user: sevanna
-    region: virginia
-    plan: free            # Gratis por ~30 días. Para producción usa un plan de pago.
+# archivo y creará el servicio web. Las variables marcadas como "sync: false"
+# se definen manualmente en el dashboard (son específicas o secretas).
+# La base PostgreSQL es externa (Neon): la PostgreSQL gratuita de Render expira
+# a los ~30 días. Ver docs/DESPLIEGUE_RENDER.md.
 
 services:
   - type: web
     name: sevanna-api
     runtime: docker
-    region: virginia       # Debe coincidir con la región de la base de datos.
+    region: virginia       # Cerca de Neon AWS us-east-1 (menor latencia).
     plan: free             # Se "duerme" por inactividad. Sube de plan para evitarlo.
     branch: main
     dockerfilePath: ./Dockerfile
     healthCheckPath: /api/v1/health
     autoDeploy: true
     envVars:
-      # Conexión a la base (Render inyecta la URL; la app la normaliza a asyncpg).
+      # Conexión a la base externa (Neon). Pega la URL tal cual la da el
+      # proveedor; la app la normaliza a asyncpg (esquema, sslmode, etc.).
       - key: DATABASE_URL
-        fromDatabase:
-          name: sevanna-db
-          property: connectionString
+        sync: false
       # Secreto JWT generado automáticamente por Render.
       - key: JWT_SECRET_KEY
         generateValue: true
