@@ -30,7 +30,12 @@ ni inscripciones.
 
 - 🔴 **Secreto JWT fuerte**: generar `JWT_SECRET_KEY` aleatorio y largo
   (`python -c "import secrets; print(secrets.token_urlsafe(64))"`).
-- 🔴 **PostgreSQL real**: definir `DATABASE_URL` y ejecutar `alembic upgrade head`.
+- 🔴 **PostgreSQL de producción**: la base gratuita de Render expiró (≈30 días).
+  Se migra a **Neon** (no expira); definir su URL en `DATABASE_URL` de Render.
+  Las migraciones y el seed se aplican solos al arrancar. Ver
+  `docs/DESPLIEGUE_RENDER.md`.
+- 🟡 **Cold starts en Render (plan gratis)**: el servicio se duerme tras ~15 min
+  sin tráfico. Plan Starter o monitor externo (UptimeRobot a `/health/live`).
 - 🔴 **Credenciales de Wompi** (empezar en sandbox): `PAYMENT_API_KEY` (privada),
   `PAYMENT_PUBLIC_KEY`, `PAYMENT_INTEGRITY_SECRET` (firma de checkout),
   `PAYMENT_WEBHOOK_SECRET` (firma de eventos), y registrar la URL pública del
