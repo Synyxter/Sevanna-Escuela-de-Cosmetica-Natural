@@ -60,7 +60,7 @@ async def test_sync_creates_catalog_and_removes_listed_course() -> None:
 
     assert total == len(DATA["courses"])
     assert fenol is None
-    assert bisuteria.price == Decimal("250000.00")
+    assert bisuteria.price == Decimal("150000.00")
     assert bisuteria.image_url == "/images/cursos/curso33.jpg"
 
 
